@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Render JSON sorted by their keys.",
    "author" : [
       "Masahiro Iuchi <masahiro.iuchi@gmail.com>"
    ],
@@ -42,7 +42,8 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "5.008001"
+            "Mojolicious" : "0",
+            "Tie::IxHash" : "0"
          }
       },
       "test" : {

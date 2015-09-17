@@ -1,11 +1,27 @@
 package Mojolicious::Plugin::CanonicalJSON;
-use 5.008001;
-use strict;
-use warnings;
+use Mojo::Base 'Mojolicious::Plugin';
+use Mojo::JSON;
+use Tie::IxHash;
 
 our $VERSION = "0.01";
 
-
+sub register {
+    my ( $self, $app, $conf ) = @_;
+    my $renderer       = $app->renderer;
+    my $json_handler   = $renderer->handlers->{json};
+    my $_encode_object = \&Mojo::JSON::_encode_object;
+    $renderer->add_handler(
+        json => sub {
+            local *Mojo::JSON::_encode_object = sub {
+                my $object = shift;
+                tie my %sorted_object, 'Tie::IxHash';
+                $sorted_object{$_} = $object->{$_} for sort( keys %$object );
+                $_encode_object->( \%sorted_object );
+            };
+            $json_handler->(@_);
+        }
+    );
+}
 
 1;
 __END__
@@ -14,15 +30,19 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::CanonicalJSON - It's new $module
+Mojolicious::Plugin::CanonicalJSON - Render JSON sorted by their keys.
 
 =head1 SYNOPSIS
 
-    use Mojolicious::Plugin::CanonicalJSON;
+    # Mojolicious
+    $app->plugin('CanonicalJSON');
+
+    # Mojolicious::Lite
+    plugin 'CanonicalJSON';
 
 =head1 DESCRIPTION
 
-Mojolicious::Plugin::CanonicalJSON is ...
+Mojolicious::Plugin::CanonicalJSON is a Mojolicious plugins for rendering JSON sorted by their keys.
 
 =head1 LICENSE
 

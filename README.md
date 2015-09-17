@@ -1,14 +1,18 @@
 # NAME
 
-Mojolicious::Plugin::CanonicalJSON - It's new $module
+Mojolicious::Plugin::CanonicalJSON - Render JSON sorted by their keys.
 
 # SYNOPSIS
 
-    use Mojolicious::Plugin::CanonicalJSON;
+    # Mojolicious
+    $app->plugin('CanonicalJSON');
+
+    # Mojolicious::Lite
+    plugin 'CanonicalJSON';
 
 # DESCRIPTION
 
-Mojolicious::Plugin::CanonicalJSON is ...
+Mojolicious::Plugin::CanonicalJSON is a Mojolicious plugins for rendering JSON sorted by their keys.
 
 # LICENSE
 
