@@ -1,0 +1,4 @@
+name = "Mojolicious-Plugin-CanonicalJSON"
+# badges = ["travis"]
+module_maker="ModuleBuildTiny"
+
