@@ -12,8 +12,10 @@ sub register {
     my $_encode_object = \&Mojo::JSON::_encode_object;
     $renderer->add_handler(
         json => sub {
+            no warnings 'redefine';
             local *Mojo::JSON::_encode_object = sub {
                 my $object = shift;
+                use warnings;
                 tie my %sorted_object, 'Tie::IxHash';
                 $sorted_object{$_} = $object->{$_} for sort( keys %$object );
                 $_encode_object->( \%sorted_object );

@@ -48,10 +48,24 @@
       },
       "test" : {
          "requires" : {
+            "File::Basename" : "0",
+            "File::Spec" : "0",
+            "JSON" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/masiuchi/p5-Mojolicious-Plugin-CanonicalJSON/issues"
+      },
+      "homepage" : "https://github.com/masiuchi/p5-Mojolicious-Plugin-CanonicalJSON",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/masiuchi/p5-Mojolicious-Plugin-CanonicalJSON.git",
+         "web" : "https://github.com/masiuchi/p5-Mojolicious-Plugin-CanonicalJSON"
+      }
+   },
    "version" : "0.01"
 }
